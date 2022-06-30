@@ -27,20 +27,21 @@ let savePost = (data) =>{
 return getAllList()
 
 }
-let searchpost =function(data){
-  Item.find({name:{$regex:data.term,$options:"i"}}).exec()
-}
+// let searchpost =function(data){
+//   Item.find({name:{$regex:data.term,$options:"i"}}).exec()
+// }
 
-let deletpost =function(data){
-  Item.delet({_id:data}).catch(error =>{
-      console.log('Error')
-  })
-  return getAllList()
+// let deletpost =function(data){
+//   Item.delet({_id:data}).catch(error =>{
+//       console.log('Error')
+//   })
+//   return getAllList()
   
-}
+// }
 
 
 
 
 
-module.exports = {Item,savePost,getAllList,searchpost,deletpost }
+module.exports = {Item,savePost,getAllList }
+// searchpost,deletpost
