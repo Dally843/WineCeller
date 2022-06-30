@@ -7,26 +7,40 @@ const itemSchema = new mongoose.Schema({
   image:{type:String}
 });
 const Item = mongoose.model("Item", itemSchema);
+
+
+let getAllList=()=>{
+  return Item.find({})
+}
 let savePost = (data) =>{
   let post = new Item({
       name:data.name,
       des:data.des,
       image:data.image
   })
-  return Item.insertMany(post) 
-//     let query= post.savePost((error,result)=>{
-//   if(error) {throw error}
-//   else console.log(result)
-// });
+  post.save((error,result)=>{
+    if(error){
+        throw error
+    }
 
-// return query
+})
+return getAllList()
+
+}
+let searchpost =function(data){
+  Item.find({name:{$regex:data.term,$options:"i"}}).exec()
+}
+
+let deletpost =function(data){
+  Item.delet({_id:data}).catch(error =>{
+      console.log('Error')
+  })
+  return getAllList()
+  
 }
 
 
 
-let getAllList=()=>{
-  return Item.find({})
-}
-module.exports = {Item,savePost,getAllList}
-// module.exports.savePost = savePost
-// module.exports.getAllList = getAllList
+
+
+module.exports = {Item,savePost,getAllList,searchpost,deletpost }

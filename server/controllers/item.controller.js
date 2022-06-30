@@ -3,6 +3,7 @@
 
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
 // var db = require("../database-mysql");
+const { error } = require('jquery');
 var Item = require('../database-mongo/Item.model.js');
 
 // UNCOMMENT IF USING MYSQL WITH CALLBACKS
@@ -19,7 +20,6 @@ var Item = require('../database-mongo/Item.model.js');
 // UNCOMMENT IF USING MONGOOSE WITH PROMISES
 var selectAll = function (req, res) {
     Item.getAllList({})
-    Item.savePost()
     .then((items) => {
         res.status(200).send(items);
     })
@@ -34,6 +34,7 @@ var save = function (req,res){
         res.send(data)
     })
 }
+
 // UNCOMMENT IF USING MONGOOSE WITH PROMISES & ASYNC AWAIT
 // var selectAll = async function (req, res) {
 //   try {

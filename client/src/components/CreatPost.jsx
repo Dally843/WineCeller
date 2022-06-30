@@ -9,38 +9,15 @@ class CreatPost extends React.Component{
             des:"",
             image:""
         }
-        this.handleChange = this.handleChangename.bind(this)
-        this.handleChange = this.handleChangeimg.bind(this)
-        this.handleChange = this.handleChangedess.bind(this)
+
         this.handleSubmit=this.handleSubmit.bind(this)
     }
-    handleChangename(e) {
-        let namme=e.target.value
-        this.setState({
-            name:namme
-        })
-    }
-    handleChangedess(e) {
-        let dess=e.target.value
-        this.setState({
-            des:dess
-        })
-    }
-    handleChangeimg(e) {
-        let img=e.target.value
-        this.setState({
-            name:img
-        })
-    }
-    handleSubmit(input){
-        axios.post("http://localhost:3000/api/post",{
-            name: input.target.name.value,
-            des:input.target.des.value,
-            image: input.target.image.value,        
-        }).then(response =>{
+
+    handleSubmit(){
+        axios.post("http://localhost:3000/api/post",this.state).then(response =>{
             console.log(response.data)
             this.setState({
-            recipe:response.data
+            data:response.data
             })
         })
         }
@@ -49,18 +26,19 @@ class CreatPost extends React.Component{
         <div>
             <center><h2>Creat Product</h2>
             <div>
+                {console.log(this.state)}
                 <form >
                     <label >Creat Name
-                    <input type="text"  onChange={this.handleChangename} />
+                    <input type="text"  onChange={(e)=>this.setState({name:e.target.value})} />
                     </label><br />
                     
-                    <label >Description
-                            <textarea    onChange={this.handleChangedess}></textarea>
+                    <label >Description <br />
+                            <textarea    onChange={(e)=>this.setState({des:e.target.value})}></textarea>
                     </label><br />
                     <label>Insert Image
-                        <input type="url" onChange={this.handleChangeimg}/>
+                        <input type="url" onChange={(e)=>this.setState({image:e.target.value})}/>
                     </label><br />
-                    <input type="submit"  value='ADD PRODUCT' onClick={()=>{this.handleSubmit(this.state.name,this.state.des,this.state.image)}}/> 
+                    <input type="submit"  value='ADD PRODUCT' onClick={()=>{this.handleSubmit}}/> 
 
                 </form>
             </div>

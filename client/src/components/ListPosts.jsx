@@ -3,16 +3,19 @@ import React from "react";
 
 
 const ListPosts =(props)=>{
-        
-    return(props.list.map((element,i)=>{
+    <div>
+    {props.list.map((element,i)=>{
         return(
-            <div>
+            <div key={i}>
                 <h1>{element.name}</h1>
                 <center><img src={element.image} onClick={()=>{props.selectOne(i)}} ></img></center>
-                
-            </div>
+                <center><button className="delete" onClick={()=>{props.deleteOne(i)}}>Delete</button>  </center>
+                </div>
+            
         )
-    }))
+        
+    })}
+    </div>
 }
 
 export default ListPosts;
